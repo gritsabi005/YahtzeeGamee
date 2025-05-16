@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "143077889338",
+    "project_id": "yahtzeegame-2b1d7",
+    "storage_bucket": "yahtzeegame-2b1d7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143077889338:android:357f2477cc90ff50f62c03",
+        "android_client_info": {
+          "package_name": "com.example.yahtzeegame"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADbvJNClhaVy7G5e2WoQKtdfnWTdT_j0A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

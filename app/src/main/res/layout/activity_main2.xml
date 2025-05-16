@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity2">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yahtzee it!"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="#2196F3"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Dice Boxes Container -->
+    <LinearLayout
+        android:id="@+id/diceContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/titleText">
+
+        <!-- Horizontal container for dice -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!-- Dice 1 -->
+            <ImageButton
+                android:id="@+id/dice1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="4dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:contentDescription="Dice 1"/>
+
+            <!-- Dice 2 -->
+            <ImageButton
+                android:id="@+id/dice2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="4dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:contentDescription="Dice 2"/>
+
+            <!-- Dice 3 -->
+            <ImageButton
+                android:id="@+id/dice3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="4dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:contentDescription="Dice 3"/>
+
+            <!-- Dice 4 -->
+            <ImageButton
+                android:id="@+id/dice4"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="4dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:contentDescription="Dice 4"/>
+
+            <!-- Dice 5 -->
+            <ImageButton
+                android:id="@+id/dice5"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="4dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:contentDescription="Dice 5"/>
+        </LinearLayout>
+
+        <!-- Shake Button -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+
+            <Button
+                android:id="@+id/shakeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shake!"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/cleanButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Clean"
+                android:layout_marginEnd="8dp"/>
+
+            <!-- Add this TextView for counter -->
+            <TextView
+                android:id="@+id/counterText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shakes: "
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical"
+                android:padding="8dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Upper Scoreboard -->
+    <ScrollView
+        android:id="@+id/upperScoreboardScroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/diceContainer"
+        app:layout_constraintBottom_toTopOf="@id/totalScore"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/lowerScoreboardScroll"
+        app:layout_constraintWidth_percent="0.45">
+
+        <LinearLayout
+            android:id="@+id/upperScoreboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Upper Section"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:padding="8dp"/>
+
+            <!-- Aces -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <Button
+                    android:id="@+id/acesButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:ellipsize="end"
+                    android:gravity="start|center_vertical"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="4dp"
+                    android:singleLine="true"
+                    android:text="Aces (1's)"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/acesScore"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dice_box_background"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <!-- Twos -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                <Button
+                    android:id="@+id/twosButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Twos (2's)"
+                    android:textSize="14sp"
+                    android:padding="4dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:background="@null"
+                    android:textColor="@color/white"
+                    android:gravity="start|center_vertical"
+                    android:singleLine="true"
+                    android:ellipsize="end"/>
+
+                <TextView
+                    android:id="@+id/twosScore"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dice_box_background"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <!-- Threes -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                <Button
+                    android:id="@+id/threesButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Threes (3's)"
+                    android:textSize="14sp"
+                    android:padding="4dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:background="@null"
+                    android:textColor="@color/white"
+                    android:gravity="start|center_vertical"
+                    android:singleLine="true"
+                    android:ellipsize="end"/>
+
+                <TextView
+                    android:id="@+id/threesScore"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dice_box_background"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <!-- Fours -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                <Button
+                    android:id="@+id/foursButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Fours (4's)"
+                    android:textSize="14sp"
+                    android:padding="4dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:background="@null"
+                    android:textColor="@color/white"
+                    android:gravity="start|center_vertical"
+                    android:singleLine="true"
+                    android:ellipsize="end"/>
+
+                <TextView
+                    android:id="@+id/foursScore"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dice_box_background"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <!-- Fives -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                <Button
+                    android:id="@+id/fivesButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Fives (5's)"
+                    android:textSize="14sp"
+                    android:padding="4dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:background="@null"
+                    android:textColor="@color/white"
+                    android:gravity="start|center_vertical"
+                    android:singleLine="true"
+                    android:ellipsize="end"/>
+
+                <TextView
+                    android:id="@+id/fivesScore"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dice_box_background"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <!-- Sixes -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                <Button
+                    android:id="@+id/sixesButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Sixes (6's)"
+                    android:textSize="14sp"
+                    android:padding="4dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:background="@null"
+                    android:textColor="@color/white"
+                    android:gravity="start|center_vertical"
+                    android:singleLine="true"
+                    android:ellipsize="end"/>
+
+                <TextView
+                    android:id="@+id/sixesScore"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dice_box_background"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <!-- Upper Section Bonus -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <Button
+                    android:id="@+id/bonusButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:ellipsize="end"
+                    android:gravity="start|center_vertical"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="4dp"
+                    android:singleLine="true"
+                    android:text="Bonus (35 p)"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/upperBonusScore"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dice_box_background"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <!-- Upper Section Total -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/upperTotalButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start|center_vertical"
+                    android:padding="4dp"
+                    android:text="Upper Score"
+                    android:textColor="@android:color/holo_purple"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/upperTotalScore"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dice_box_background"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Lower Scoreboard -->
+    <ScrollView
+        android:id="@+id/lowerScoreboardScroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toBottomOf="@id/diceContainer"
+        app:layout_constraintBottom_toTopOf="@id/totalScore"
+        app:layout_constraintStart_toEndOf="@id/upperScoreboardScroll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.45">
+
+        <LinearLayout
+            android:id="@+id/lowerScoreboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lower Section"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:padding="8dp"/>
+
+            <!-- Three of a Kind -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                <Button
+                    android:id="@+id/threeOfAKindButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Three of a Kind"
+                    android:textSize="14sp"
+                    android:padding="4dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:background="@null"
+                    android:textColor="@color/white"
+                    android:gravity="start|center_vertical"
+                    android:singleLine="true"
+                    android:ellipsize="end"/>
+
+                <TextView
+                    android:id="@+id/threeOfAKindScore"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dice_box_background"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <!-- Four of a Kind -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                <Button
+                    android:id="@+id/fourOfAKindButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Four of a Kind"
+                    android:textSize="14sp"
+                    android:padding="4dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:background="@null"
+                    android:textColor="@color/white"
+                    android:gravity="start|center_vertical"
+                    android:singleLine="true"
+                    android:ellipsize="end"/>
+
+                <TextView
+                    android:id="@+id/fourOfAKindScore"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dice_box_background"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <!-- Full House -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                <Button
+                    android:id="@+id/fullHouseButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Full House"
+                    android:textSize="14sp"
+                    android:padding="4dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:background="@null"
+                    android:textColor="@color/white"
+                    android:gravity="start|center_vertical"
+                    android:singleLine="true"
+                    android:ellipsize="end"/>
+
+                <TextView
+                    android:id="@+id/fullHouseScore"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dice_box_background"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <!-- Small Straight -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                <Button
+                    android:id="@+id/smallStraightButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Small Straight"
+                    android:textSize="14sp"
+                    android:padding="4dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:background="@null"
+                    android:textColor="@color/white"
+                    android:gravity="start|center_vertical"
+                    android:singleLine="true"
+                    android:ellipsize="end"/>
+
+                <TextView
+                    android:id="@+id/smallStraightScore"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dice_box_background"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <!-- Large Straight -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                <Button
+                    android:id="@+id/largeStraightButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Large Straight"
+                    android:textSize="14sp"
+                    android:padding="4dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:background="@null"
+                    android:textColor="@color/white"
+                    android:gravity="start|center_vertical"
+                    android:singleLine="true"
+                    android:ellipsize="end"/>
+
+                <TextView
+                    android:id="@+id/largeStraightScore"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dice_box_background"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <!-- Yahtzee -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                <Button
+                    android:id="@+id/yahtzeeButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Yahtzee"
+                    android:textSize="14sp"
+                    android:padding="4dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:background="@null"
+                    android:textColor="@color/white"
+                    android:gravity="start|center_vertical"
+                    android:singleLine="true"
+                    android:ellipsize="end"/>
+
+                <TextView
+                    android:id="@+id/yahtzeeScore"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dice_box_background"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <!-- Chance -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                <Button
+                    android:id="@+id/chanceButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Chance"
+                    android:textSize="14sp"
+                    android:padding="4dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:background="@null"
+                    android:textColor="@color/white"
+                    android:gravity="start|center_vertical"
+                    android:singleLine="true"
+                    android:ellipsize="end"/>
+
+                <TextView
+                    android:id="@+id/chanceScore"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dice_box_background"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <!-- Lower Section Total -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/lowerTotalButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start|center_vertical"
+                    android:padding="4dp"
+                    android:text="Lower Score"
+                    android:textColor="@android:color/holo_purple"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/lowerTotalScore"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dice_box_background"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Total Score -->
+    <TextView
+        android:id="@+id/totalScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:padding="16dp"
+        android:text="Total Score: 0"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
