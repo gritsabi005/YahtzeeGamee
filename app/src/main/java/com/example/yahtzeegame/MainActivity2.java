@@ -413,12 +413,25 @@ public class MainActivity2 extends AppCompatActivity implements SensorEventListe
             }
             
             boolean isIt = false;
+            int[] toBeDeletedIfAny = new int[5];
+            int any = 0;
 
-            if ((array[0] == 1 && array[1] == 2 && array[2] == 3 && array[3] == 4) ||
-                (array[0] == 2 && array[1] == 3 && array[2] == 4 && array[3] == 5) ||
-                (array[1] == 2 && array[2] == 3 && array[3] == 4 && array[4] == 5) ||
-                (array[1] == 3 && array[2] == 4 && array[3] == 5 && array[4] == 6)) {
-                isIt = true;
+            // Remove duplication by forward to backwards filtering
+            for (int i = 0; i < 5; i++) {
+                if (i == 0 || array[i] != array[i-1]) { // if i is not the same with before it thats already store
+                    toBeDeletedIfAny[any] = array[i];
+                    any = any + 1;
+                }
+            }
+
+            // Check for the sequence after the duplicates are removed 
+            if (any >= 4) {
+                for (int i = 0; i <= any - 4; i++) {
+                    if (toBeDeletedIfAny[i+3] - toBeDeletedIfAny[i] == 3) {
+                        isIt = true;
+                        break;
+                    }
+                }
             }
 
             either0orResult(30, isIt, smallStraightLabel, smallStraightButton);
