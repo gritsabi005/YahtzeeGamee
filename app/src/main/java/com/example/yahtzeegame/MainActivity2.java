@@ -40,8 +40,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity2 extends AppCompatActivity implements SensorEventListener {
+    private boolean udahBelumSih;
     private ImageButton die1, die2, die3, die4, die5;
-    private Button throwButton, cleanButton;
+    private Button throwButton/*, cleanButton*/;
     private Button acesScoreButton, twosScoreButton, threesScoreButton, foursScoreButton, fivesScoreButton,
             sixesScoreButton, bonusButton;
     private TextView acesLabel, twosLabel, threesLabel, foursLabel, fivesLabel, sixesLabel, fullHouseLabel,
@@ -81,12 +82,13 @@ public class MainActivity2 extends AppCompatActivity implements SensorEventListe
 
         username = getIntent().getStringExtra("username");
         uid = getIntent().getStringExtra("uid");
+        udahBelumSih = true;
         initializeViews();
         setupClickListeners();
 
         TextView welcomingText = findViewById(R.id.titleText);
         welcomingText.setText("Hi, " + username + "!");
-
+        vibeIt = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         sensorIt = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerateIt = sensorIt.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorIt.registerListener((SensorEventListener) MainActivity2.this, accelerateIt,
@@ -137,7 +139,7 @@ public class MainActivity2 extends AppCompatActivity implements SensorEventListe
         die4 = findViewById(R.id.dice4);
         die5 = findViewById(R.id.dice5);
         throwButton = findViewById(R.id.shakeButton);
-        cleanButton = findViewById(R.id.cleanButton);
+        //cleanButton = findViewById(R.id.cleanButton);
         acesScoreButton = findViewById(R.id.acesButton);
         twosScoreButton = findViewById(R.id.twosButton);
         threesScoreButton = findViewById(R.id.threesButton);
@@ -255,11 +257,17 @@ public class MainActivity2 extends AppCompatActivity implements SensorEventListe
             shakeIt();
         });
 
-        cleanButton.setOnClickListener(v -> {
-            checkTheClean();
-        });
+        /*cleanButton.setOnClickListener(v -> {
+            if(udahBelumSih == false){
+                Toast.makeText(this, "You have to score first before rolling the dice", Toast.LENGTH_LONG).show();
+            } else {
+                checkTheClean();
+            }
+        });*/
 
         acesScoreButton.setOnClickListener(v -> {
+            udahBelumSih = true;
+
             int counter1 = 0;
             ImageButton[] buttons = { die1, die2, die3, die4, die5 };
             for (int i = 0; i < buttons.length; i++) {
@@ -267,85 +275,87 @@ public class MainActivity2 extends AppCompatActivity implements SensorEventListe
                     counter1 = counter1 + 1;
                 }
             }
-            play(counter1);
 
             upperScoreScoring(counter1, acesLabel, acesScoreButton);
             checkTheClean();
+
         });
 
         twosScoreButton.setOnClickListener(v -> {
+            udahBelumSih = true;
+
             int counter2 = 0;
             for (int i = 0; i < 5; i++) {
                 if (valuesInEachDice[i] == 2) {
                     counter2 = counter2 + 2;
                 }
             }
-            play(counter2 / 2);
 
             upperScoreScoring(counter2, twosLabel, twosScoreButton);
             checkTheClean();
         });
 
         threesScoreButton.setOnClickListener(v -> {
+            udahBelumSih = true;
             int counter3 = 0;
             for (int i = 0; i < 5; i++) {
                 if (valuesInEachDice[i] == 3) {
                     counter3 = counter3 + 3;
                 }
             }
-            play(counter3 / 3);
 
             upperScoreScoring(counter3, threesLabel, threesScoreButton);
             checkTheClean();
         });
 
         foursScoreButton.setOnClickListener(v -> {
+            udahBelumSih = true;
             int counter4 = 0;
             for (int i = 0; i < 5; i++) {
                 if (valuesInEachDice[i] == 4) {
                     counter4 = counter4 + 4;
                 }
             }
-            play(counter4 / 4);
             upperScoreScoring(counter4, foursLabel, foursScoreButton);
             checkTheClean();
         });
 
         fivesScoreButton.setOnClickListener(v -> {
+            udahBelumSih = true;
             int counter5 = 0;
             for (int i = 0; i < 5; i++) {
                 if (valuesInEachDice[i] == 5) {
                     counter5 = counter5 + 5;
                 }
             }
-            play(counter5 / 5);
 
             upperScoreScoring(counter5, fivesLabel, fivesScoreButton);
             checkTheClean();
         });
 
         sixesScoreButton.setOnClickListener(v -> {
+            udahBelumSih = true;
             int counter6 = 0;
             for (int i = 0; i < 5; i++) {
                 if (valuesInEachDice[i] == 6) {
                     counter6 = counter6 + 6;
                 }
             }
-            play(counter6 / 6);
 
             upperScoreScoring(counter6, sixesLabel, sixesScoreButton);
             checkTheClean();
         });
 
         bonusButton.setOnClickListener((v -> {
+            udahBelumSih = true;
             if (upperTotalScoreInt >= 63) {
                 giveEmBonus();
             }
-            play(6);
             checkTheClean();
         }));
 
         threeOfAKindButton.setOnClickListener(v -> {
+            udahBelumSih = true;
             int[] array = arrangeTheDice();
             if (array == null) {
                 return;
@@ -358,13 +368,13 @@ public class MainActivity2 extends AppCompatActivity implements SensorEventListe
                     break;
                 }
             }
-            play(sumItUp / 6);
 
             either0orResult(sumItUp, isIt, threeOfAKindLabel, threeOfAKindButton);
             checkTheClean();
         });
 
         fourOfAKindButton.setOnClickListener(v -> {
+            udahBelumSih = true;
             int[] array = arrangeTheDice();
             if (array == null) {
                 return;
@@ -377,26 +387,26 @@ public class MainActivity2 extends AppCompatActivity implements SensorEventListe
                     break;
                 }
             }
-            play(sumItUp / 6);
 
             either0orResult(sumItUp, isIt, fourOfAKindLabel,fourOfAKindButton);
             checkTheClean();
         });
 
         fullHouseButton.setOnClickListener(v -> {
+            udahBelumSih = true;
             int[] array = arrangeTheDice();
             if (array == null) {
                 return;
             }
             boolean isIt = (array[0] == array[1] && array[1] == array[2] && array[3] == array[4] && array[2] != array[3]) ||
                     (array[0] == array[1] && array[2] == array[3] && array[3] == array[4] && array[1] != array[2]);
-            play(6);
 
             either0orResult(25, isIt, fullHouseLabel, fullHouseButton);
             checkTheClean();
         });
 
         smallStraightButton.setOnClickListener(v -> {
+            udahBelumSih = true;
             int[] array = arrangeTheDice();
             if (array == null) {
                 return;
@@ -410,37 +420,39 @@ public class MainActivity2 extends AppCompatActivity implements SensorEventListe
                 (array[1] == 3 && array[2] == 4 && array[3] == 5 && array[4] == 6)) {
                 isIt = true;
             }
-            
-            play(6);
+
             either0orResult(30, isIt, smallStraightLabel, smallStraightButton);
             checkTheClean();
         });
 
         largeStraightButton.setOnClickListener(v -> {
+            udahBelumSih = true;
             int[] array = arrangeTheDice();
             if (array == null) {
                 return;
             }
             boolean isIt = (array[0] == 1 && array[1] == 2 && array[2] == 3 && array[3] == 4 && array[4] == 5) ||
                     (array[0] == 2 && array[1] == 3 && array[2] == 4 && array[3] == 5 && array[4] == 6);
-            play(6);
+
             either0orResult(40, isIt, largeStraightLabel,largeStraightButton);
             checkTheClean();
         });
 
         yahtzeeButton.setOnClickListener(v -> {
+            udahBelumSih = true;
             int[] array = arrangeTheDice();
             if (array == null) {
                 return;
             }
             boolean isIt = array[0] == array[4];
-            play(6);
+
 
             either0orResult(50, isIt, yahtzeeLabel,  yahtzeeButton);
             checkTheClean();
         });
 
         chanceButton.setOnClickListener(v -> {
+            udahBelumSih = true;
             for (int i = 0; i < 5; i++) {
                 if (valuesInEachDice[i] == 0) {
                     Toast.makeText(this, "Roll the dice first!", Toast.LENGTH_SHORT).show();
@@ -451,7 +463,7 @@ public class MainActivity2 extends AppCompatActivity implements SensorEventListe
             for (int i = 0; i < 5; i++) {
                 sum += valuesInEachDice[i];
             }
-            play(sum / 6);
+
             either0orResult(sum, true, chanceLabel, chanceButton);
             checkTheClean();
         });
@@ -494,7 +506,7 @@ public class MainActivity2 extends AppCompatActivity implements SensorEventListe
     }
 
     private void giveEmBonus() {
-        play(6);
+
         upperBonusScore.setText("35");
         upperTotalScoreInt = upperTotalScoreInt + 35;
         upperTotalScore.setText("" + upperTotalScoreInt);
@@ -504,8 +516,13 @@ public class MainActivity2 extends AppCompatActivity implements SensorEventListe
     }
 
     public void shakeIt() {
+        if(udahBelumSih == false){
+            Toast.makeText(this, "You have to score first before rolling the dice", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         counter = counter + 1;
-        counterText.setText("Shakes: " + counter+"/3");
+        counterText.setText("Shakes: " + counter +"/3");
 
         Random random = new Random();
         ImageButton[] buttons = { die1, die2, die3, die4, die5 };
@@ -518,14 +535,11 @@ public class MainActivity2 extends AppCompatActivity implements SensorEventListe
             }
         }
 
-        if (counter == 10) {
+        if (counter == 3) {
             counter = 0;
             throwButton.setEnabled(false);
         }
-        cleanButton.setEnabled(true);
-    }
-
-    public void play(int whichSound) {
+        /*cleanButton.setEnabled(true);*/
 
     }
 
@@ -544,7 +558,7 @@ public class MainActivity2 extends AppCompatActivity implements SensorEventListe
                 smallStraightButton, largeStraightButton, yahtzeeButton, chanceButton, bonusButton };
         TextView[] scoreLabels = { acesLabel, twosLabel, threesLabel, foursLabel, fivesLabel, sixesLabel,
                 threeOfAKindLabel, fourOfAKindLabel, fullHouseLabel, smallStraightLabel, largeStraightLabel,
-                yahtzeeLabel, chanceLabel };
+                yahtzeeLabel, chanceLabel, upperBonusScore };
 
         if (!acesScoreButton.isEnabled() && !twosScoreButton.isEnabled() && !threesScoreButton.isEnabled()
                 && !foursScoreButton.isEnabled() && !fivesScoreButton.isEnabled()
@@ -556,31 +570,33 @@ public class MainActivity2 extends AppCompatActivity implements SensorEventListe
             }
         }
 
-        boolean areAllScoredButtonsPushed = true;
-        for (int i = 0; i < scoreButtons.length; i++){
-            if(scoreButtons[i].isEnabled()){
-                areAllScoredButtonsPushed = false;
-                break;
-            }
-        }
-        if (areAllScoredButtonsPushed){
+        if (!acesScoreButton.isEnabled() && !twosScoreButton.isEnabled() && !threesScoreButton.isEnabled() && !foursScoreButton.isEnabled() &&
+        !fivesScoreButton.isEnabled() && !sixesScoreButton.isEnabled() && !threeOfAKindButton.isEnabled() && !fourOfAKindButton.isEnabled() && !fullHouseButton.isEnabled() &&
+        !smallStraightButton.isEnabled() && !largeStraightButton.isEnabled() && !yahtzeeButton.isEnabled() && !chanceButton.isEnabled() && !bonusButton.isEnabled()){
             storeTheScore();
             Toast.makeText(this, "Your final score is " + totalScore, Toast.LENGTH_LONG).show();
             for (int j = 0; j < scoreButtons.length; j++) {
                 scoreButtons[j].setEnabled(true);
                 scoreLabels[j].setText("");
             }
+            upperTotalScore.setText("");
+            lowerTotalScore.setText("");
+            lowerTotalScoreInt=0;
+            upperTotalScoreInt=0;
             totalScore = 0;
             scoreLabel.setText("Total Score: " + totalScore);
+            udahBelumSih = true;
         }
 
         counter = 0;
         counterText.setText("Shakes:" + counter + "/3");
+
+
     }
 
     private void storeTheScore() {
 
-        FirebaseUser currentPlayerId = FirebaseAuth.getInstance().getCurrentUser();
+        /*FirebaseUser currentPlayerId = FirebaseAuth.getInstance().getCurrentUser();
         String checkThePlayer = currentPlayerId.getUid();
         if (checkThePlayer.equals(uid)) {
             DatabaseReference scoreRef = FirebaseDatabase
@@ -593,6 +609,32 @@ public class MainActivity2 extends AppCompatActivity implements SensorEventListe
             scoreRef.push().setValue(scoreData);
         } else {
             Toast.makeText(this, "You are not logged in, this score could not be saved", Toast.LENGTH_SHORT).show();
+        }*/
+        try {
+            FirebaseUser currentPlayerId = FirebaseAuth.getInstance().getCurrentUser();
+            if (currentPlayerId == null) {
+                Toast.makeText(this, "You are not logged in, this score could not be saved", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            
+            String checkThePlayer = currentPlayerId.getUid();
+            if (checkThePlayer.equals(uid)) {
+                DatabaseReference scoreRef = FirebaseDatabase
+                        .getInstance("https://yahtzeegame-2b1d7-default-rtdb.europe-west1.firebasedatabase.app")
+                        .getReference("scores");
+                Map<String, Object> scoreData = new HashMap<>();
+                scoreData.put("userId", uid);
+                scoreData.put("username", username);
+                scoreData.put("scored", totalScore);
+                scoreRef.push().setValue(scoreData)
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(this, "Failed to save score: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+            } else {
+                Toast.makeText(this, "You are not logged in, this score could not be saved", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Error saving score", Toast.LENGTH_SHORT).show();
         }
     }
 

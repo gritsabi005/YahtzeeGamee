@@ -103,13 +103,6 @@
                 android:text="Shake!"
                 android:layout_marginEnd="8dp"/>
 
-            <Button
-                android:id="@+id/cleanButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Clean"
-                android:layout_marginEnd="8dp"/>
-
             <!-- Add this TextView for counter -->
             <TextView
                 android:id="@+id/counterText"
@@ -142,15 +135,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Upper Section"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:padding="8dp"/>
 
             <!-- Aces -->
             <LinearLayout
@@ -445,15 +429,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Lower Section"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:padding="8dp"/>
 
             <!-- Three of a Kind -->
             <LinearLayout
